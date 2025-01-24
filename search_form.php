@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Поиск велопарковки</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Подключаем jQuery -->
     <script>
         $(document).ready(function() {
             $('#search').on('input', function() {
@@ -36,14 +36,14 @@
         </header>
 
         <div class="main-content">
-            <h1>Поиск велопарковки</h1>
+            <h1>Поиск велопарковки в городе Москве</h1>
 
             <form id="searchForm" class="form-container">
+                <h1>Введите название улицы:</h1> 
                 <input 
                     type="text"
                     class="search-street-input"
                     id="search" 
-                    placeholder="Введите название улицы..." 
                     autocomplete="off"
                 >
                 <div id="suggestions" class="suggestions-list"></div>

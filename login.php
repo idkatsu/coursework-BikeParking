@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -42,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="register.php">Зарегистрироваться</a>
             </nav>
         </header>
-
         <div class="login-page">
             <div class="form-container">
                 <h1>Вход</h1>
@@ -70,6 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="register-link">
                     <p>Еще нет аккаунта? <a href="register.php">Зарегистрироваться</a></p>
                 </div>
+            </div>
+
+            <div class="site-description custom-description">
+                <h2>О сайте Bike Parking</h2>
+                <p>Bike Parking - это платформа для велосипедистов, которая позволяет легко находить доступные парковки для велосипедов в городе Москва. 
+                После авторизации вы сможете добавлять новые парковки, просматривать доступные варианты и использовать поиск, чтобы найти подробную информацию о парковке.
+                Сайт создан для того, чтобы сделать жизнь велосипедистов удобнее.</p>
             </div>
         </div>
 

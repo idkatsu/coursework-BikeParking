@@ -3,7 +3,6 @@ include('db.php');
 
 // Проверяем, была ли отправлена форма
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Получаем данные из формы
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -26,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $insert_stmt = $pdo->prepare($insert_query);
         $insert_stmt->execute([$username, $email, $hashed_password]);
 
-        // Перенаправляем на страницу входа после успешной регистрации
         header('Location: login.php');
         exit();
     }

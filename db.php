@@ -1,5 +1,5 @@
 <?php
-$host = "pg3.sweb.ru"; 
+$host = "pg3.sweb.ru";
 $dbname = "kuzvladik1";
 $user = "kuzvladik1";
 $password = "WY7*CYGBSDnLCEHK";

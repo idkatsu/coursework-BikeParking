@@ -34,15 +34,21 @@ $username = $_SESSION['username'];
             </div>
 
             <div class="dashboard-buttons">
-                <a href="index.html" class="btn">Добавить велопарковку</a>
+                <a href="index.php" class="btn">Добавить велопарковку</a>
                 <a href="view_parking.php" class="btn">Посмотреть велопарковки</a>
                 <a href="search_form.php" class="btn">Найти велопарковку</a>
             </div>
         </div>
 
-        <footer>
-            <p>© 2025 Bike Parking. Все права защищены.</p>
-        </footer>
+<footer>
+    <p>© 2025 Bike Parking. Все права защищены.</p>
+    <p>
+        Источник данных: 
+        <a href="https://data.mos.ru/opendata/916?pageSize=50&pageIndex=2" target="_blank" rel="noopener noreferrer" class="footer-link">
+            Датасет велопарковок Москвы
+        </a>
+    </p>
+</footer>
     </div>
 
 </body>

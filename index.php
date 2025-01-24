@@ -1,3 +1,15 @@
+<?php
+include 'db.php';
+
+try {
+    $sql = "SELECT id, name FROM administrative_districts";
+    $stmt = $pdo->query($sql);
+    $districts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Ошибка выполнения запроса: " . $e->getMessage());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -19,8 +31,13 @@
             <h1>Добавить велопарковку</h1>
             <form action="add_parking.php" method="post">
                 <div class="form-group">
-                    <label for="admarea">Район:</label>
-                    <input type="text" id="admarea" name="admarea" required>
+                    <label for="admarea">Административный округ:</label>
+                    <select id="admarea" name="admarea" required>
+                        <option value="">Выберите административный округ</option>
+                        <?php foreach ($districts as $district): ?>
+                            <option value="<?= htmlspecialchars($district['name']) ?>"><?= htmlspecialchars($district['name']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <div class="form-group">

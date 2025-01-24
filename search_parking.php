@@ -7,9 +7,9 @@ if (isset($_GET['query'])) {
     try {
         // Запрос для поиска парковок в двух таблицах
         $sql = "
-            SELECT admarea, address, capacity FROM bikeparking WHERE address LIKE :query
+            SELECT admarea, address, capacity, type FROM bikeparking WHERE address LIKE :query
             UNION
-            SELECT admarea, address, capacity FROM privateparking WHERE address LIKE :query
+            SELECT admarea, address, capacity, type FROM privateparking WHERE address LIKE :query
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':query', $query . '%', PDO::PARAM_STR); // Подстановка введенной строки
@@ -19,7 +19,7 @@ if (isset($_GET['query'])) {
 
         if (!empty($results)) {
             foreach ($results as $parking) {
-                echo "<div class='suggestion' onclick='showDetails(\"{$parking['admarea']}\", \"{$parking['address']}\", \"{$parking['capacity']}\")'>";
+                echo "<div class='suggestion' onclick='showDetails(\"{$parking['admarea']}\", \"{$parking['address']}\", \"{$parking['capacity']}\", \"{$parking['type']}\")'>";
                 echo htmlspecialchars($parking['address']); // Показываем только адрес в подсказках
                 echo "</div>";
             }
@@ -33,10 +33,9 @@ if (isset($_GET['query'])) {
 ?>
 
 <script>
-    // Функция для отображения полной информации о парковке при клике
-    function showDetails(admarea, address, capacity) {
+    function showDetails(admarea, address, capacity, type) {
         document.getElementById('parkingInfo').innerHTML = 
-            "<h2>Район: " + admarea + "</h2><p>Адрес: " + address + "</p><p>Количество мест: " + capacity + "</p>";
+            "<h2>Район: " + admarea + "</h2><p>Адрес: " + address + "</p><p>Количество мест: " + capacity + "</p><p>Тип: " + type;
         document.getElementById('suggestions').innerHTML = '';
     }
 </script>

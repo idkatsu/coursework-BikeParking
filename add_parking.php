@@ -3,35 +3,26 @@ include('db.php');
 
 session_start();
 
-// Проверяем, авторизован ли пользователь
 if (!isset($_SESSION['user_id'])) {
-    // Если пользователь не авторизован, перенаправляем его на страницу входа
     header("Location: login.php");
     exit();
 }
 
-// Получаем ID пользователя из сессии
 $user_id = $_SESSION['user_id'];
 
-// Проверяем, была ли отправлена форма
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Получаем данные из формы
-    $admarea = $_POST['admarea'];
-    $address = $_POST['address'];
+    $admarea = $_POST['admarea']; 
+    $address = $_POST['address']; 
     $capacity = $_POST['capacity'];
 
-    // Проверка, существует ли уже парковка с таким адресом в нужном районе
-    $stmt = $pdo->prepare("SELECT * FROM pendingparking WHERE address = :address AND admarea = :admarea");
+    $stmt = $pdo->prepare("SELECT * FROM pendingparking WHERE address = :address");
     $stmt->bindParam(':address', $address);
-    $stmt->bindParam(':admarea', $admarea);
     $stmt->execute();
 
-    // Если такая парковка уже существует, выводим сообщение
     if ($stmt->rowCount() > 0) {
-        $message = "Парковка с таким адресом и районом уже существует в базе данных.";
+        $message = "Парковка с таким адресом уже существует в базе данных.";
         $message_type = "error";
     } else {
-        // Если такой парковки нет, вставляем новые данные в базу
         $stmt = $pdo->prepare("INSERT INTO pendingparking (admarea, address, capacity, user_id) VALUES (:admarea, :address, :capacity, :user_id)");
         $stmt->bindParam(':admarea', $admarea);
         $stmt->bindParam(':address', $address);

@@ -12,7 +12,13 @@ if ($page < 1) {
 $offset = ($page - 1) * $limit;
 
 try {
-    $sql = "SELECT admarea, address, capacity FROM bikeparking ORDER BY address LIMIT :limit OFFSET :offset";
+    $sql = "
+        (SELECT admarea, address, capacity, type FROM bikeparking)
+        UNION ALL
+        (SELECT admarea, address, capacity, type FROM privateparking)
+        ORDER BY address
+        LIMIT :limit OFFSET :offset
+    ";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -20,10 +26,17 @@ try {
 
     $parkings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Получаем общее количество записей для пагинации
-    $sql_count = "SELECT COUNT(*) FROM bikeparking";
+    // Получаем общее количество записей для пагинации из обеих таблиц
+    $sql_count = "
+        (SELECT COUNT(*) FROM bikeparking)
+        UNION ALL
+        (SELECT COUNT(*) FROM privateparking)
+    ";
     $stmt_count = $pdo->query($sql_count);
-    $total_parkings = $stmt_count->fetchColumn();
+    $total_parkings = 0;
+    while ($row = $stmt_count->fetchColumn()) {
+        $total_parkings += $row;
+    }
 
     $total_pages = ceil($total_parkings / $limit);
 
@@ -37,7 +50,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список велопарковок</title>
+    <title>Список велопарковок города Москвы</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -50,7 +63,7 @@ try {
         </header>
 
         <div class="main-content">
-            <h1>Список велопарковок</h1>
+            <h1>Список велопарковок города Москвы</h1>
 
             <?php if (!empty($parkings)): ?>
                 <table class="parking-table">
@@ -58,12 +71,14 @@ try {
                         <th>Район</th>
                         <th>Адрес</th>
                         <th>Количество мест</th>
+                        <th>Тип</th>
                     </tr>
                     <?php foreach ($parkings as $parking): ?>
                         <tr>
                             <td><?= htmlspecialchars($parking['admarea']) ?></td>
                             <td><?= htmlspecialchars($parking['address']) ?></td>
                             <td><?= htmlspecialchars($parking['capacity']) ?></td>
+                            <td><?= htmlspecialchars($parking['type']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
@@ -81,7 +96,7 @@ try {
                 </div>
 
             <?php else: ?>
-                <p>Нет доступных велопарковок.</p>
+                <p>Нет доступных парковок.</p>
             <?php endif; ?>
         </div>
 

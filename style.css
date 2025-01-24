@@ -1,3 +1,27 @@
+body {
+    background-image: url('images/kartinka.png');
+    background-size: cover;
+    background-position: center;
+    background-color: #f8f8f8;
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: -1; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,12 +29,6 @@
     font-family: 'Arial', sans-serif;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: #f8f8f8;
-}
 
 header {
     display: flex;
@@ -40,18 +58,13 @@ header nav a:hover {
 
 .form-container {
     width: 100%;
-    max-width: 350px;
+    max-width: 350px; 
+    margin-top: 100px;
     margin: 50px auto;
-    padding: 20px;
+    padding: 20px; 
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-}
-
-.form-container h1 {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 20px;
 }
 
 .form-group {
@@ -67,7 +80,7 @@ header nav a:hover {
 
 .form-group input {
     width: 100%;
-    padding: 12px;
+    padding: 12px; 
     font-size: 18px; 
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -86,7 +99,7 @@ button.btn {
     background-color: #18bc9c;
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 30px; 
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -103,17 +116,19 @@ button.btn:hover {
 
 .welcome-message {
     margin-bottom: 30px;
+    margin-top: 300px; 
+    text-align: center; 
 }
 
 .welcome-message h1 {
-    font-size: 32px;
+    font-size: 42px; 
     color: #2c3e50;
 }
 
 .welcome-message p {
-    font-size: 18px;
-    color: #555;
-    margin-top: 10px;
+    font-size: 22px; 
+    color: #2c3e50;
+    margin-top: 20px; 
 }
 
 .dashboard-buttons {
@@ -138,22 +153,23 @@ button.btn:hover {
     background-color: #16a085;
 }
 
+
 footer {
     text-align: center;
     padding: 10px;
     background-color: #2c3e50;
     color: white;
     font-size: 14px;
-    margin-top: auto;
+    margin-top: auto; 
 }
+
 
 .login-page,
 .register-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: #f8f8f8;
+    
+    display: block; 
+    text-align: center; 
+
 }
 
 .error-message {
@@ -189,7 +205,7 @@ footer {
 .parking-table th, .parking-table td {
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid #f1f1f1; 
 }
 
 .parking-table th {
@@ -207,6 +223,7 @@ footer {
     background-color: #f9f9f9;
 }
 
+
 .pagination {
     margin-top: 20px;
     display: flex;
@@ -221,6 +238,7 @@ footer {
     padding: 8px 15px;
     border: 2px solid #18bc9c;
     border-radius: 4px;
+    background-color: white;
     transition: background-color 0.3s ease;
 }
 
@@ -231,13 +249,14 @@ footer {
 
 .pagination span {
     font-size: 16px;
-    color: #555;
+    color: black; 
 }
 
+
 .search-street-input {
-    width: 100%;
-    padding: 15px;
-    font-size: 18px;
+    width: 100%; 
+    padding: 15px; 
+    font-size: 18px; 
     border: 2px solid #ccc;
     border-radius: 4px;
     outline: none;
@@ -285,4 +304,66 @@ footer {
     color: #555;
     font-size: 16px;
     margin-top: 10px;
+}
+
+.footer-link {
+    color: #FFD700; 
+    text-decoration: none; 
+    font-weight: bold; 
+}
+
+.footer-link:hover {
+    text-decoration: underline; 
+    color: #FFFFFF; 
+}
+
+.custom-description {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 200px; 
+    text-align: center;
+    font-size: 1.1em;
+    max-width: 800px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@media (max-width: 480px) {
+    .welcome-message h1 {
+        font-size: 24px;
+    }
+
+    .welcome-message p {
+        font-size: 16px;
+    }
+
+    .dashboard-buttons .btn {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .form-container {
+        margin-top: 40px;
+        padding: 15px;
+        max-width: 95%;
+    }
+
+    header {
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .parking-table th, .parking-table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    footer {
+        font-size: 10px;
+    }
 }
